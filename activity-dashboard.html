@@ -251,17 +251,22 @@
     display:flex; flex-wrap:wrap; align-items:flex-start; gap:22px;
   }
   .filter-group{ display:flex; flex-direction:column; gap:7px; min-width:0; }
+  .filter-group--wide{ flex:1 1 340px; }
   .filter-label{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-muted); }
-  .filter-hint{ font-size:11px; color:var(--ink-muted); }
   .search-box{
     display:flex; align-items:center; gap:8px; background:var(--surface-soft);
     border:1px solid var(--border); border-radius:10px; padding:7px 10px; min-width:220px;
   }
   .search-box svg{ width:15px; height:15px; color:var(--ink-muted); flex-shrink:0; }
   .search-box input{
-    border:none; background:transparent; outline:none; font-size:13px; color:var(--ink); width:100%;
+    border:none; background:transparent; outline:none; font-size:13px; color:var(--ink);
+    flex:1 1 auto; min-width:70px; width:100%;
   }
+  .search-box--combo{ padding-right:6px; }
+  .search-divider{ width:1px; height:20px; background:var(--border); flex-shrink:0; }
   .chip-row{ display:flex; flex-wrap:wrap; gap:6px; }
+  .chip-row--inline{ flex-wrap:nowrap; flex-shrink:0; }
+  .chip-row--inline .chip{ padding:5px 10px; font-size:11.5px; }
   .chip{
     border:1px solid var(--border); background:var(--surface-soft); color:var(--ink-2);
     border-radius:999px; padding:6px 12px; font-size:12.5px; font-weight:600; cursor:pointer;
@@ -481,29 +486,23 @@
 
   <!-- Filter bar -->
   <div class="filterbar">
-    <div class="filter-group">
-      <span class="filter-label">Search</span>
-      <div class="search-box">
+    <div class="filter-group filter-group--wide">
+      <span class="filter-label">Search &amp; date range</span>
+      <div class="search-box search-box--combo">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         <input type="text" id="searchInput" placeholder="Search date…" autocomplete="off" />
+        <span class="search-divider"></span>
+        <div class="chip-row chip-row--inline" id="dateRangeChips">
+          <button class="chip" data-range="7" type="button">7d</button>
+          <button class="chip" data-range="14" type="button">14d</button>
+          <button class="chip active" data-range="30" type="button">30d</button>
+        </div>
       </div>
-      <span class="filter-hint">Filters the active table below</span>
-    </div>
-
-    <div class="filter-group">
-      <span class="filter-label">Date range</span>
-      <div class="chip-row" id="dateRangeChips">
-        <button class="chip" data-range="7" type="button">7d</button>
-        <button class="chip" data-range="14" type="button">14d</button>
-        <button class="chip active" data-range="30" type="button">30d</button>
-      </div>
-      <span class="filter-hint">Scopes KPIs, trend chart &amp; Day table</span>
     </div>
 
     <div class="filter-group">
       <span class="filter-label">Status</span>
       <div class="chip-row" id="statusChips"></div>
-      <span class="filter-hint">Scopes the status mix chart</span>
     </div>
 
     <div class="filter-group">
@@ -515,7 +514,6 @@
         </button>
         <div class="dd-menu" id="countryDdMenu"></div>
       </div>
-      <span class="filter-hint">Scopes country chart &amp; table</span>
     </div>
 
     <div class="filter-group">
@@ -527,7 +525,6 @@
         </button>
         <div class="dd-menu" id="sourceDdMenu"></div>
       </div>
-      <span class="filter-hint">Scopes source chart &amp; table</span>
     </div>
 
     <div class="filter-spacer"></div>
