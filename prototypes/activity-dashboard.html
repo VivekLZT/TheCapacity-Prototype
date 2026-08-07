@@ -20,17 +20,17 @@
 <style>
   :root{
     color-scheme: light;
-    --page:#f5f3ec;
-    --surface:#ffffff;
-    --surface-soft:#faf9f3;
-    --surface-sunken:#efece1;
+    --page:#F8F9FE;
+    --surface:#FFFFFF;
+    --surface-soft:#F1F3FA;
+    --surface-sunken:#E9ECF5;
     --ink:#18160e;
     --ink-2:#57544a;
     --ink-muted:#8c8875;
     --border:rgba(24,22,14,0.12);
     --border-soft:rgba(24,22,14,0.07);
     --border-strong:rgba(24,22,14,0.24);
-    --topbar-bg:rgba(245,243,236,0.92);
+    --topbar-bg:rgba(248,249,254,0.92);
     --shadow-menu:0 12px 32px -8px rgba(24,22,14,0.28);
     --tooltip-bg:#18160e;
     --tooltip-fg:#ffffff;
@@ -38,17 +38,17 @@
     /* Brand — mode-invariant, always dark chip + accent glyph */
     --ink-solid:#18160e;
 
-    /* Accent — mode-invariant brand yellow */
-    --accent:#62f962;
-    --accent-ink:#123512;
-    --accent-hover:#7dfb7d;
-    --accent-line:#3fdb3f;
-    --accent-soft:#e3fbe3;
-    --accent-soft-ink:#1f6b1f;
-    --info-bg:#e7f2ff;
+    /* Accent — mode-invariant brand emerald */
+    --accent:#059669;
+    --accent-ink:#ffffff;
+    --accent-hover:#047857;
+    --accent-line:#047857;
+    --accent-soft:#D1FAE5;
+    --accent-soft-ink:#047857;
+    --info-bg:#D1FAE5;
 
-    --series-blue:#2a78d6;
-    --series-orange:#eb6834;
+    --series-blue:#059669;
+    --series-orange:#059669;
     --series-aqua:#1baf7a;
     --series-yellow:#c98500;
     --series-magenta:#e87ba4;
@@ -56,7 +56,7 @@
     --series-violet:#4a3aa7;
     --series-red:#e34948;
 
-    --good:#0ca30c;
+    --good:#059669;
     --warning-ink:#8a5a00;
     --warning-bg:#fff1c9;
     --warning-dot:#fab219;
@@ -66,8 +66,8 @@
     --critical-ink:#8a1f1f;
     --critical-bg:#fbdada;
     --critical-dot:#d03b3b;
-    --good-bg:#dff3df;
-    --good-ink:#0b5e0b;
+    --good-bg:#D1FAE5;
+    --good-ink:#047857;
 
     --ord-1:#c7dcf8;
     --ord-2:#5598e7;
@@ -99,12 +99,12 @@
       --tooltip-bg:#33301f;
       --tooltip-fg:#faf9f3;
 
-      --accent-soft:rgba(98,249,98,0.15);
-      --accent-soft-ink:#62f962;
-      --info-bg:rgba(57,135,229,0.16);
+      --accent-soft:rgba(5,150,105,0.20);
+      --accent-soft-ink:#34d399;
+      --info-bg:rgba(5,150,105,0.20);
 
-      --series-blue:#3987e5;
-      --series-orange:#d95926;
+      --series-blue:#10b981;
+      --series-orange:#10b981;
       --series-aqua:#199e70;
       --series-yellow:#c98500;
       --series-magenta:#d55181;
@@ -118,8 +118,8 @@
       --serious-bg:rgba(236,131,90,0.18);
       --critical-ink:#ff9b9b;
       --critical-bg:rgba(208,59,59,0.18);
-      --good-bg:rgba(12,163,12,0.16);
-      --good-ink:#7bdc7b;
+      --good-bg:rgba(5,150,105,0.20);
+      --good-ink:#34d399;
 
       --ord-1:#193860;
       --ord-2:#2a78d6;
@@ -146,12 +146,12 @@
     --tooltip-bg:#33301f;
     --tooltip-fg:#faf9f3;
 
-    --accent-soft:rgba(98,249,98,0.15);
-    --accent-soft-ink:#62f962;
-    --info-bg:rgba(57,135,229,0.16);
+    --accent-soft:rgba(5,150,105,0.20);
+    --accent-soft-ink:#34d399;
+    --info-bg:rgba(5,150,105,0.20);
 
-    --series-blue:#3987e5;
-    --series-orange:#d95926;
+    --series-blue:#10b981;
+    --series-orange:#10b981;
     --series-aqua:#199e70;
     --series-yellow:#c98500;
     --series-magenta:#d55181;
@@ -165,8 +165,8 @@
     --serious-bg:rgba(236,131,90,0.18);
     --critical-ink:#ff9b9b;
     --critical-bg:rgba(208,59,59,0.18);
-    --good-bg:rgba(12,163,12,0.16);
-    --good-ink:#7bdc7b;
+    --good-bg:rgba(5,150,105,0.20);
+    --good-ink:#34d399;
 
     --ord-1:#193860;
     --ord-2:#2a78d6;
@@ -194,27 +194,92 @@
   button{ font-family:inherit; }
   ::selection{ background:var(--accent); color:var(--accent-ink); }
 
-  .wrap{ max-width:1360px; margin:0 auto; padding:0 28px 64px; }
+  .wrap{ max-width:1360px; margin:0 auto; padding:14px 28px 64px; }
 
-  /* ---------- Topbar ---------- */
+  /* ---------- App shell: topbar + sidebar ---------- */
+  .app-shell{ display:flex; flex-direction:column; min-height:100vh; --sidebar-w:252px; }
+  .app-shell.sidebar-collapsed{ --sidebar-w:76px; }
+
   .topbar{
-    display:flex; align-items:center; justify-content:space-between;
-    gap:16px; padding:20px 28px; position:sticky; top:0; z-index:40;
-    background:var(--topbar-bg); backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--border-soft);
+    display:flex; align-items:stretch; position:sticky; top:0; z-index:40;
+    background:var(--surface);
+    border-bottom:1px solid var(--border-soft); height:72px; flex-shrink:0;
   }
-  .brand{ display:flex; align-items:center; gap:12px; }
-  .brand-mark{
-    width:36px; height:36px; border-radius:10px; background:var(--ink-solid);
-    border:1px solid var(--border);
-    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  .brand-cell{
+    width:var(--sidebar-w); flex-shrink:0; display:flex; align-items:center;
+    padding:0 22px; border-right:1px solid var(--border-soft); overflow:hidden;
+    transition:width .18s ease;
   }
-  .brand-mark span{ color:var(--accent); font-weight:800; font-size:17px; letter-spacing:-0.5px; }
-  .brand-text-group{ display:flex; flex-direction:column; line-height:1.2; }
-  .brand-title{ font-weight:700; font-size:15px; letter-spacing:-0.1px; }
-  .brand-sub{ font-size:11.5px; color:var(--ink-muted); text-transform:uppercase; letter-spacing:0.06em; }
+  .brand-logo-chip{ display:flex; align-items:center; flex-shrink:0; }
+  .brand-logo{ height:32px; width:auto; display:block; flex-shrink:0; }
+  .brand-logo-collapsed{
+    width:40px; height:40px; overflow:hidden; position:relative; flex-shrink:0; display:none;
+  }
+  .brand-logo-collapsed img{ position:absolute; left:0; top:0; height:40px; width:auto; max-width:none; }
+  .app-shell.sidebar-collapsed .brand-logo-chip{ display:none; }
+  .app-shell.sidebar-collapsed .brand-logo-collapsed{ display:block; }
+  .app-shell.sidebar-collapsed .brand-cell{ padding:0; justify-content:center; }
+
+  .topbar-main{
+    flex:1 1 auto; display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding:0 20px 0 14px; min-width:0;
+  }
+  .icon-btn{
+    width:36px; height:36px; display:flex; align-items:center; justify-content:center; border-radius:10px;
+    border:1px solid transparent; background:none; color:var(--ink-2); cursor:pointer; flex-shrink:0; padding:0;
+  }
+  .icon-btn:hover{ background:var(--surface-soft); color:var(--ink); }
+  .icon-btn svg{ width:19px; height:19px; }
 
   .topbar-right{ display:flex; align-items:center; gap:12px; }
+  .user-avatar{
+    width:36px; height:36px; border-radius:50%; background:var(--series-blue); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13.5px;
+    border:none; cursor:pointer; flex-shrink:0; letter-spacing:0;
+  }
+  .user-avatar:hover{ filter:brightness(1.08); }
+  .user-avatar--sm{ background:var(--ink-solid); color:var(--accent); }
+
+  /* ---------- Sidebar ---------- */
+  .app-body{ flex:1 1 auto; display:flex; min-height:0; }
+  .sidebar{
+    width:var(--sidebar-w); flex-shrink:0; background:var(--surface);
+    border-right:1px solid var(--border-soft); display:flex; flex-direction:column;
+    justify-content:space-between; transition:width .18s ease;
+    position:sticky; top:72px; align-self:flex-start; height:calc(100vh - 72px); overflow-y:auto;
+  }
+  .sidebar-nav{ padding:14px 12px; display:flex; flex-direction:column; gap:2px; }
+  .nav-group{ display:flex; flex-direction:column; }
+  .nav-item{
+    display:flex; align-items:center; gap:11px; padding:10px 10px; border-radius:10px; border:none;
+    background:none; color:var(--ink-2); font-size:13.5px; font-weight:600; cursor:pointer; width:100%;
+    text-align:left; text-decoration:none; font-family:inherit;
+  }
+  .nav-item:hover{ background:var(--surface-soft); color:var(--ink); }
+  .nav-item.active{ background:var(--accent-soft); color:var(--accent-soft-ink); }
+  .nav-item-icon{ width:18px; height:18px; flex-shrink:0; display:flex; }
+  .nav-item-icon svg{ width:100%; height:100%; }
+  .nav-item-label{ flex:1 1 auto; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .nav-chevron{ width:13px; height:13px; flex-shrink:0; color:var(--ink-muted); transition:transform .15s ease; }
+  .nav-group.open > .nav-item .nav-chevron{ transform:rotate(180deg); }
+  .nav-children{ display:none; flex-direction:column; padding-left:41px; gap:1px; margin:2px 0 4px; }
+  .nav-group.open .nav-children{ display:flex; }
+  .nav-child{
+    display:block; padding:8px 10px; border-radius:8px; font-size:12.5px; font-weight:600;
+    color:var(--ink-muted); text-decoration:none;
+  }
+  .nav-child:hover{ background:var(--surface-soft); color:var(--ink); }
+  .nav-child.active{ color:var(--accent-soft-ink); background:var(--accent-soft); }
+  .sidebar-footer{ padding:14px 16px; border-top:1px solid var(--border-soft); display:flex; align-items:center; }
+
+  .app-shell.sidebar-collapsed .sidebar{ overflow:visible; }
+  .app-shell.sidebar-collapsed .nav-item-label,
+  .app-shell.sidebar-collapsed .nav-chevron,
+  .app-shell.sidebar-collapsed .nav-children{ display:none; }
+  .app-shell.sidebar-collapsed .nav-item{ justify-content:center; padding:10px; }
+  .app-shell.sidebar-collapsed .sidebar-footer{ justify-content:center; }
+
+  .app-main{ flex:1 1 auto; min-width:0; }
   .freshness-pill{
     display:flex; align-items:center; gap:7px; background:var(--surface);
     border:1px solid var(--border); border-radius:999px; padding:6px 12px 6px 10px;
@@ -246,16 +311,16 @@
 
   /* ---------- Filter bar ---------- */
   .filterbar{
-    margin-top:22px; background:var(--surface); border:1px solid var(--border);
+    margin-top:0; background:var(--surface); border:1px solid var(--border);
     border-radius:var(--radius-lg); padding:16px 18px; box-shadow:var(--shadow-card);
     display:flex; flex-wrap:wrap; align-items:flex-start; gap:22px;
   }
-  .filter-group{ display:flex; flex-direction:column; gap:7px; min-width:0; }
-  .filter-group--wide{ flex:1 1 340px; }
+  .filter-group{ display:flex; flex-direction:column; gap:7px; min-width:0; flex-shrink:0; }
+  .filter-group--wide{ flex:0 1 auto; }
   .filter-label{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-muted); }
   .search-box{
     display:flex; align-items:center; gap:8px; background:var(--surface-soft);
-    border:1px solid var(--border); border-radius:10px; padding:7px 10px; min-width:220px;
+    border:1px solid var(--border); border-radius:10px; padding:7px 10px; min-width:230px; flex-shrink:0;
   }
   .search-box svg{ width:15px; height:15px; color:var(--ink-muted); flex-shrink:0; }
   .search-box input{
@@ -444,10 +509,19 @@
     .charts-row{ grid-template-columns:1fr; }
     .charts-row2{ grid-template-columns:1fr; }
   }
+  @media (max-width: 900px){
+    .app-shell{ --sidebar-w:76px; }
+    .app-shell:not(.sidebar-collapsed) .nav-item-label,
+    .app-shell:not(.sidebar-collapsed) .nav-chevron,
+    .app-shell:not(.sidebar-collapsed) .nav-children{ display:none; }
+    .app-shell:not(.sidebar-collapsed) .nav-item{ justify-content:center; padding:10px; }
+    .app-shell:not(.sidebar-collapsed) .brand-logo{ display:none; }
+    .app-shell:not(.sidebar-collapsed) .brand-logo-collapsed{ display:block; }
+    .app-shell:not(.sidebar-collapsed) .brand-cell{ padding:0; justify-content:center; }
+  }
   @media (max-width: 680px){
     .kpi-grid{ grid-template-columns:repeat(2, 1fr); }
-    .wrap{ padding:0 14px 48px; }
-    .topbar{ padding:16px 14px; }
+    .wrap{ padding:20px 14px 48px; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -457,32 +531,82 @@
 </head>
 <body>
 
+<div class="app-shell" id="appShell">
+
 <div class="topbar">
-  <div class="brand">
-    <div class="brand-mark"><span>CS</span></div>
-    <div class="brand-text-group">
-      <div class="brand-title">The Capacity Software</div>
-      <div class="brand-sub">Activity dashboard · Prototype</div>
-    </div>
+  <div class="brand-cell">
+    <div class="brand-logo-chip"><img class="brand-logo" src="cap1.webp" alt="The Capacity" /></div>
+    <div class="brand-logo-collapsed"><img src="cap1.webp" alt="The Capacity" /></div>
   </div>
-  <div class="topbar-right">
-    <div class="freshness-pill"><span class="freshness-dot"></span>Data as of Jul 31, 2026</div>
-    <button class="btn theme-toggle" id="themeToggleBtn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
-      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"></path></svg>
-    </button>
-    <button class="btn" id="printBtn" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-      Print
-    </button>
-    <button class="btn btn-accent" id="exportAllBtn" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-      Export view
-    </button>
+  <div class="topbar-main">
+    <div class="topbar-left">
+      <button class="icon-btn" id="sidebarToggleBtn" type="button" aria-label="Toggle sidebar" title="Toggle sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="14" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="topbar-right">
+      <button class="btn theme-toggle" id="themeToggleBtn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"></path></svg>
+      </button>
+      <button class="user-avatar" type="button" aria-label="Account" title="Account">A</button>
+    </div>
   </div>
 </div>
 
-<div class="wrap">
+<div class="app-body">
+  <aside class="sidebar" id="sidebar">
+    <nav class="sidebar-nav">
+      <div class="nav-group" data-group="customer">
+        <button class="nav-item" type="button">
+          <span class="nav-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
+          <span class="nav-item-label">Customer</span>
+          <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="nav-children">
+          <a class="nav-child" href="#">Manage Customers</a>
+          <a class="nav-child" href="#">Customer Groups</a>
+        </div>
+      </div>
+
+      <div class="nav-group" data-group="survey">
+        <button class="nav-item" type="button">
+          <span class="nav-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"></rect><line x1="8" y1="8" x2="16" y2="8"></line><line x1="8" y1="12" x2="16" y2="12"></line><line x1="8" y1="16" x2="12" y2="16"></line></svg></span>
+          <span class="nav-item-label">Survey</span>
+          <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="nav-children">
+          <a class="nav-child" href="#">My Surveys</a>
+          <a class="nav-child" href="#">Templates</a>
+        </div>
+      </div>
+
+      <div class="nav-group open" data-group="admin">
+        <button class="nav-item active" type="button">
+          <span class="nav-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path></svg></span>
+          <span class="nav-item-label">Admin</span>
+          <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="nav-children">
+          <a class="nav-child" href="#">Users &amp; Roles</a>
+          <a class="nav-child active" href="#">Activity Dashboard</a>
+          <a class="nav-child" href="#">Settings</a>
+        </div>
+      </div>
+
+      <a class="nav-item" href="#">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></span>
+        <span class="nav-item-label">Knowledge Base</span>
+      </a>
+      <a class="nav-item" href="#">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg></span>
+        <span class="nav-item-label">Support</span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="app-main">
+  <div class="wrap">
 
   <!-- Filter bar -->
   <div class="filterbar">
@@ -610,6 +734,9 @@
     <span class="footer-note">The Capacity Software · Activity Dashboard v1.0</span>
   </div>
 
+  </div>
+  </main>
+</div>
 </div>
 
 <div class="chart-tooltip" id="tooltip"></div>
@@ -925,7 +1052,7 @@
       {
         label:"Rejection rate", value: fmtPct(rejRate),
         icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>',
-        iconBg:"var(--critical-bg)", iconColor:"var(--critical-ink)",
+        iconBg:"var(--accent-soft)", iconColor:"var(--accent-soft-ink)",
         sub: fmtInt(totalRejected) + " rejected",
         deltaHtml: deltaMarkup(rejDelta, "down", "pts, recent vs earlier")
       }
@@ -1595,13 +1722,6 @@
     var rows = getRowsForTable();
     downloadCsv("activity-dashboard-" + state.activeTab + ".csv", rows);
   });
-  document.getElementById("exportAllBtn").addEventListener("click", function(){
-    var rows = getRowsForTable();
-    downloadCsv("activity-dashboard-" + state.activeTab + "-view.csv", rows);
-  });
-  document.getElementById("printBtn").addEventListener("click", function(){
-    window.print();
-  });
 
   /* ============ THEME ============ */
 
@@ -1612,6 +1732,26 @@
       var next = current === "dark" ? "light" : "dark";
       document.documentElement.setAttribute("data-theme", next);
       try{ localStorage.setItem("capacity-dashboard-theme", next); }catch(e){}
+    });
+  }
+
+  /* ============ SIDEBAR ============ */
+
+  function initSidebar(){
+    var shell = document.getElementById("appShell");
+    var toggleBtn = document.getElementById("sidebarToggleBtn");
+    toggleBtn.addEventListener("click", function(){
+      shell.classList.toggle("sidebar-collapsed");
+    });
+
+    document.querySelectorAll(".nav-group").forEach(function(group){
+      var trigger = group.querySelector(":scope > .nav-item");
+      trigger.addEventListener("click", function(){
+        if(shell.classList.contains("sidebar-collapsed")) return;
+        var wasOpen = group.classList.contains("open");
+        document.querySelectorAll(".nav-group.open").forEach(function(g){ g.classList.remove("open"); });
+        if(!wasOpen) group.classList.add("open");
+      });
     });
   }
 
@@ -1626,6 +1766,7 @@
     renderTable();
   }
 
+  initSidebar();
   initTheme();
   initFilterBar();
   renderAll();
